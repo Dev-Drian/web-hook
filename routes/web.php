@@ -17,7 +17,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
 
-        $users = User::get();
+        $users = User::where('rol','client')->with('tokens')->get();
         return view('dashboard', compact('users'));
     })->name('dashboard');
 
@@ -48,5 +48,5 @@ Route::middleware([
             'user' => $user,
             'token' => $token,
         ];
-    })->name('token');
+    })->name('register-user');
 });

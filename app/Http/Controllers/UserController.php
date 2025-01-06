@@ -28,9 +28,36 @@ class UserController extends Controller
 
         // Generar el token para el usuario
         $token = $user->createToken('Personal Access Token')->plainTextToken;
+        $user->token = $token;
+        $user->save();
         return $token;
 
         // Retornar el usuario y el token
         return  redirect()->back();
+    }
+
+    public function generateToken(User $user)
+    {
+        // Eliminar tokens existentes
+        $user->tokens()->delete();
+
+
+        // Generar un nuevo token
+        $token = $user->createToken('Personal Access Token')->plainTextToken;
+        $user->token = $token;
+        $user->save();
+
+
+        return response()->json(['token' => $token], 200);
+    }
+
+    public function deleteToken(User $user)
+    {
+        // Eliminar todos los tokens del usuario
+        $user->tokens()->delete();
+        $user->token = "";
+        $user->save();
+
+        return response()->json(['success' => true], 200);
     }
 }

@@ -31,4 +31,8 @@ Route::middleware([
     })->name('register.user');
 
     Route::post('/register-user', [UserController::class, 'store'])->name('user.store');
+
+
+    Route::post('/generate-token/{user}', [UserController::class, 'generateToken'])->name('generate.token');
+    Route::delete('/delete-token/{user}', [UserController::class, 'deleteToken'])->name('delete.token');
 });

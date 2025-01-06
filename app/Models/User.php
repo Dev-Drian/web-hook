@@ -30,7 +30,8 @@ class User extends Authenticatable
         'email',
         'password',
         'rol',
-        'is_premium'
+        'is_premium',
+        'token'
     ];
 
     /**

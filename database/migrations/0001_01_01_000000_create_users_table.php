@@ -18,7 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('rol');
-            $table->boolean('is_premium')->nullable();;
+            $table->string('token')->nullable();
+
+            $table->string('premium')->nullable();;
 
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

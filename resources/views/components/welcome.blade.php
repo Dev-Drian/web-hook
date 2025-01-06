@@ -29,7 +29,7 @@
                                     Register a New User
                                 </h3>
                                 <div class="mt-2">
-                                    <form method="POST" action="{{ route('register-user') }}">
+                                    <form method="POST" action="{{ route('user.store') }}">
                                         @csrf
 
                                         <div class="mb-4">

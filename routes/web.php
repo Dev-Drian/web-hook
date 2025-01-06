@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,36 +19,16 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
 
-        $users = User::where('rol','client')->with('tokens')->get();
+        $users = User::where('rol', 'client')->with('tokens')->get();
         return view('dashboard', compact('users'));
     })->name('dashboard');
 
 
 
-    Route::post('/register-user', function (Request $request) {
+    Route::get('/register-user', function (Request $request) {
+        $users = User::where('rol', 'client')->with('tokens')->get();
+        return view('user.create', compact('users'));
+    })->name('register.user');
 
-        $input = $request->all();
-
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ])->validate();
-
-        $user = User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make('password'),
-            'rol' => 'client',
-        ]);
-
-        // Generar el token para el usuario
-        $token  = $user->createToken('Personal Access Token')->accessToken;
-
-        // Retornar el usuario y el token
-        return [
-            'user' => $user,
-            'token' => $token,
-        ];
-    })->name('register-user');
+    Route::post('/register-user', [UserController::class, 'store'])->name('user.store');
 });

@@ -9,4 +9,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('/webhook/reserva', [WebhookController::class, 'recibirReserva'])->name('webhook.reserva');
+
+Route::get('/webhook/is_premium', [WebhookController::class, 'is_premium'])->name('webhook.is_premium');
+Route::get('/webhook/reserva', [WebhookController::class, 'recibirReserva'])->name('webhook.reserva');

@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Http;
 
 class WebhookController extends Controller
 {
+
+    public function is_premium()
+    {
+        $token = request()->header('token');
+
+        // login user
+
+        return response()->json(true);
+    }
     public function recibirReserva(Request $request)
     {
         $datos = [
@@ -19,11 +28,16 @@ class WebhookController extends Controller
             'ubicacion' => 'Restaurante ABC',    // Ubicación del evento
         ];
 
+
+        $data = $request;
+
         // URL del webhook de Zapier
-        $urlWebhook = 'https://hooks.zapier.com/hooks/catch/21200123/2zys123/';
+        $urlWebhook_1 = $request->enpoint_1;
+        $urlWebhook_2 = $request->enpoint_2;
+
 
         // Enviar datos con POST
-        $response = Http::post($urlWebhook, $datos);
+        $response = Http::post($urlWebhook_1, $datos);
 
         // Verificar la respuesta
         if ($response->successful()) {

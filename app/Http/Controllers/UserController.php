@@ -25,8 +25,10 @@ class UserController extends Controller
             'rol' => 'client',
         ]);
 
+
         // Generar el token para el usuario
-        $token  = $user->createToken('Personal Access Token')->accessToken;
+        $token = $user->createToken('Personal Access Token')->plainTextToken;
+        return $token;
 
         // Retornar el usuario y el token
         return  redirect()->back();

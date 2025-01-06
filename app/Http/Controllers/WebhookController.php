@@ -12,10 +12,6 @@ class WebhookController extends Controller
 
     public function is_premium()
     {
-        $token = request()->header('token');
-
-        // login user
-
         return response()->json(TRUE);
     }
     public function recibirReserva(Request $request)

@@ -12,7 +12,7 @@ class WebhookController extends Controller
 
     public function is_premium()
     {
-        return response()->json(TRUE);
+        return response()->json(true);
     }
     public function recibirReserva(Request $request)
     {

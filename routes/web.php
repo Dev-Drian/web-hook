@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::middleware([
@@ -27,7 +27,7 @@ Route::middleware([
 
     Route::get('/register-user', function (Request $request) {
         $users = User::where('rol', 'client')->with('tokens')->get();
-        return view('user.create', compact('users'));
+        return view('user.crete', compact('users'));
     })->name('register.user');
 
     Route::post('/register-user', [UserController::class, 'store'])->name('user.store');

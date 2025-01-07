@@ -22,7 +22,7 @@ class UserController extends Controller
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make('password'),
-            'rol' => 'client',
+            'rol' => 'client'
         ]);
 
 
@@ -30,7 +30,6 @@ class UserController extends Controller
         $token = $user->createToken('Personal Access Token')->plainTextToken;
         $user->token = $token;
         $user->save();
-        return $token;
 
         // Retornar el usuario y el token
         return  redirect()->back();
@@ -58,6 +57,7 @@ class UserController extends Controller
         $user->token = "";
         $user->save();
 
-        return response()->json(['success' => true], 200);
+        return  redirect()->back();
+
     }
 }

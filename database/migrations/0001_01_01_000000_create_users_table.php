@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('rol');
             $table->string('token')->nullable();
 
-            $table->string('premium')->nullable();;
+            $table->boolean('premium')->default(false)->nullable();;
 
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

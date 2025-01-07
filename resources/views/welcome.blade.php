@@ -8,7 +8,7 @@
 </head>
 <body>
     
-  <form action="{{ route('wenewbhook.reserva') }}" method="POST">
+  <form action="{{ route('.reserva') }}" method="POST">
     @csrf
     <button type="submit"> enviar</button>
 

@@ -20,7 +20,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
 
         $users = User::where('rol', 'client')->with('tokens')->get();
-        return view('dashboard', compact('users'));
+        $numUsuarios = User::count();
+        $numUsuariosPremium = User::where('is_premium', true)->count();
+        $numRequests =  0;
+
+        return view('dashboard', compact('users', 'numUsuarios', 'numUsuariosPremium','numRequests'));
     })->name('dashboard');
 
 

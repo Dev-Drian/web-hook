@@ -31,9 +31,15 @@ class User extends Authenticatable
         'password',
         'rol',
         'premium',
-        'token'
+        'token',
     ];
 
+
+
+    public function userDetails()
+    {
+        return $this->hasMany(UserDetail::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

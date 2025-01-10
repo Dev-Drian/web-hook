@@ -9,7 +9,7 @@ deployment:
 
     # 3. Instalar dependencias de Composer
     - cd $DEPLOYPATH
-    - /usr/local/bin/composer install --no-dev --optimize-autoloader
+    - /usr/local/bin/composer install 
 
     # 4. Instalar dependencias de Node.js
     - /usr/local/bin/npm install

@@ -32,7 +32,7 @@ class UserController extends Controller
         $user->save();
 
         // Retornar el usuario y el token
-        return  redirect()->back();
+        return  redirect()->back()->with('success', 'Usuario creado correctamente');
     }
 
     public function generateToken(User $user)
@@ -47,7 +47,7 @@ class UserController extends Controller
         $user->save();
 
 
-        return response()->json(['token' => $token], 200);
+        return redirect()->back()->with('success', 'Token generado correctamente');
     }
 
     public function deleteToken(User $user)
@@ -57,7 +57,7 @@ class UserController extends Controller
         $user->token = "";
         $user->save();
 
-        return  redirect()->back();
+        return  redirect()->back()->with('success', 'Token eliminado correctamente');
 
     }
 }

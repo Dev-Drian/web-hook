@@ -40,7 +40,6 @@ class UserController extends Controller
         // Eliminar tokens existentes
         $user->tokens()->delete();
 
-
         // Generar un nuevo token
         $token = $user->createToken('Personal Access Token')->plainTextToken;
         $user->token = $token;

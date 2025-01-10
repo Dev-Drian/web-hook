@@ -3,6 +3,12 @@
 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
     <x-application-logo class="block h-12 w-auto" />
 
+    @if (session('success'))
+        <div class="mt-4 p-4 bg-green-500 text-white rounded">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <h1 class="mt-8 text-2xl font-medium text-gray-900">
         Registered Users
     </h1>

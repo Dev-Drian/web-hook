@@ -22,7 +22,7 @@ Route::middleware([
 
         $users = User::where('rol', 'client')->get();
         $numUsuarios = $users->count();
-        $numUsuariosPremium = User::where('is_premium', true)->count();
+        $numUsuariosPremium = User::where('premium', true)->count();
         $u = UserDetail::get();
         $numRequests = $u->sum('canti_request');
         return view('dashboard', compact('users', 'numUsuarios', 'numUsuariosPremium', 'numRequests'));

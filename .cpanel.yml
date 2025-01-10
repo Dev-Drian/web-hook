@@ -2,21 +2,29 @@
 deployment:
   tasks:
     # 1. Establecer la ruta de despliegue
-    - export DEPLOYPATH=/home/quoterides/public_html/
+    - export DEPLOYPATH=/home/quoterides/public_html/web-hook
 
-    # 2. Mover los archivos al directorio de despliegue
+     # 2. Mover los archivos al directorio de despliegue
     - /bin/cp -R * $DEPLOYPATH
 
     # 3. Instalar dependencias de Composer
     - cd $DEPLOYPATH
     - /usr/local/bin/composer install --no-dev --optimize-autoloader
 
-    # 4. Configurar permisos para almacenamiento y cachés
+    # 4. Instalar dependencias de Node.js
+    - /usr/local/bin/npm install
+
+    # 5. Construir los assets de frontend
+    - /usr/local/bin/npm run build
+
+    # 6. Configurar permisos para almacenamiento y cachés
     - /bin/chmod -R 775 $DEPLOYPATH/storage
     - /bin/chmod -R 775 $DEPLOYPATH/bootstrap/cache
 
-    # 5. Generar claves y cachésx
+    # 7. Generar y optimizar configuraciones
     - php artisan key:generate
     - php artisan config:cache
     - php artisan route:cache
     - php artisan view:cache
+
+    # 8. Migrar la base de datos y sembrar datos iniciales

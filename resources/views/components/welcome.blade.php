@@ -108,7 +108,7 @@
                         {{ $user->rol }}
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        @if ($user->tokens->isNotEmpty())
+                        @if ($user->token)
                             <div class="flex items-center">
                                 <span id="token-{{ $user->id }}">{{ $user->token }}</span>
                                 <button onclick="copyToClipboard('token-{{ $user->id }}')"
@@ -119,15 +119,20 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <form action="{{ route('generate.token', $user->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="text-green-500">Generate</button>
-                        </form>
-                        <form action="{{ route('delete.token', $user->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 ml-2">Delete</button>
-                        </form>
+                        @if (!$user->token)
+                            <form action="{{ route('generate.token', $user->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                <button type="submit" class="text-green-500">Generate</button>
+                            </form>
+                        @else
+                            <form action="{{ route('delete.token', $user->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 ml-2">Delete</button>
+                            </form>
+                        @endif
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         @if ($user->premium)

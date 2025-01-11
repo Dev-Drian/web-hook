@@ -2,7 +2,7 @@
 deployment:
   tasks:
     # 1. Definir ruta de despliegue
-    - export DEPLOYPATH=/home/quoterides/public_html/web-hook
+    - export DEPLOYPATH=/home/quoterides/public_html/apistaging.quoterides.com
     
     # 2. Copiar todos los archivos ignorando .git
     - /bin/cp -R * $DEPLOYPATH
